@@ -6,11 +6,11 @@ class Patient < ApplicationRecord
 
     default_scope {order(dob: :desc)}
 
-    scope :find_by_first_name,->(first_name){ find_by(first_name: first_name)}
-    scope :find_by_last_name,->(last_name){ find_by(last_name: last_name)}
+    scope :find_by_first_name,->(first_name){ where(first_name: first_name).take!}
+    scope :find_by_last_name,->(last_name){ where(last_name: last_name).take!}
     scope :find_by_first_occupation,->(occupation){ find_by(occupation: occupation)}
     scope :find_by_gender,->(gender){ find_by(gender: gender)}
-
+  
     private
     def capitalize_names
         self.first_name = first_name.capitalize

@@ -6,7 +6,7 @@ class User < ApplicationRecord
     validates :password, length: {is: 8}
     validates :password, confirmation: true
 
-    scope :find_by_user_name,->(username){find_by!(username: username)}
+    scope :find_by_user_name,->(username){where(username: username).take!}
     scope :find_by_email,->(email){find_by(email: email)}
 
 end
