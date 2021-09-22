@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  namespace 'api' do
-    namespace 'v1' do 
+  namespace :api do
+    namespace :v1 do 
       resources :patients
       resources :vital_signs, only: [:create, :show]
       resources :users, only: [:index, :create]
