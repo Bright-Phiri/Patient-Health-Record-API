@@ -9,10 +9,10 @@ module Api
                     if vital_sign.save
                       render json: { status: 'success', message: 'Vital signs successfully added to the patient',data: vital_sign}, status: :created
                     else
-                      render json: { status: 'error', message: 'Failed to add vital signs to patient', data: vital_sign.errors}, status: :unprocessable_entity
+                      render json: { status: 'error', message: 'Failed to add vital signs to patient', data: vital_sign.errors}
                     end
                 else
-                    render json: { status: 'error', message: 'Patient record not found'}, status: :not_found 
+                    render json: { status: 'error', message: 'Patient record not found'} 
                 end
             end
 
@@ -32,7 +32,7 @@ module Api
             end
 
             def record_not_found
-                render json: { status: 'error', message: 'Patient health record not found'}, status: :not_found
+                render json: { status: 'error', message: 'Patient health record not found'}
             end
         end
     end
