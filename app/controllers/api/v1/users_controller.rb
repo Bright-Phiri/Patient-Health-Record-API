@@ -14,7 +14,7 @@ module Api
                 token = encode_token({user_id: @user.id})
                 render json: {status: 'success', message: 'Account successfully created', user: @user, token: token}, status: :created
               else
-                render json: {status:'error', message: 'Failed to create user account', error: @user.errors}
+                render json: {status:'error', message: 'Failed to create user account', error: @user.errors.full_messages}
               end
             end
 
