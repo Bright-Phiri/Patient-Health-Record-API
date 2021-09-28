@@ -22,7 +22,7 @@ module Api
              if patient.save
                  render json: { status: 'success', message: 'Patient successfully created',data: patient}, status: :created
              else
-                 render json: { status: 'error', message: 'Failed to create patient', data: patient.errors}, status: :unprocessable_entity
+                 render json: { status: 'error', message: 'Failed to create patient', data: patient.errors.full_messages}
              end
          end 
  
@@ -30,7 +30,7 @@ module Api
              if @patient.update(patient_params)
                  render json: { status: 'success', message: 'Patient successfully updated',data: @patient}, status: :ok
              else
-                 render json: { status: 'error', message: 'Failed to update patient',data: @patient.errors}, status: :unprocessable_entity
+                 render json: { status: 'error', message: 'Failed to update patient',data: @patient.errors.full_messages}
              end
          end
  
@@ -38,7 +38,7 @@ module Api
              if @patient.destroy
                  render json: { status: 'success', message: 'Patient successfully deleted',data: @patient}, status: :ok
              else 
-                 render json: { status: 'error', message: 'Failed to delete patient'}, status: :unprocessable_entity
+                 render json: { status: 'error', message: 'Failed to delete patient'}
              end
          end
          
@@ -53,7 +53,7 @@ module Api
          end
  
          def record_not_found
-             render json: { status: 'error', message: 'Patient record not found'}, status: :not_found
+             render json: { status: 'error', message: 'Patient record not found'}
          end
       end
     end

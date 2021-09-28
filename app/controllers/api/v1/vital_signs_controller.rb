@@ -9,7 +9,7 @@ module Api
                     if vital_sign.save
                       render json: { status: 'success', message: 'Vital signs successfully added to the patient',data: vital_sign}, status: :created
                     else
-                      render json: { status: 'error', message: 'Failed to add vital signs to patient', data: vital_sign.errors}
+                      render json: { status: 'error', message: 'Failed to add vital signs to patient', data: vital_sign.errors.full_messages}
                     end
                 else
                     render json: { status: 'error', message: 'Patient record not found'} 
