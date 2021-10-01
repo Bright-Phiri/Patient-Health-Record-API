@@ -2,7 +2,6 @@ module Api
     module V1
       class PatientsController < ApplicationController
          before_action :set_patient, only: [:show, :update, :destroy]
-         rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
  
          def index
            patients = Patient.all
@@ -51,10 +50,7 @@ module Api
          def set_patient
              @patient = Patient.find(params[:id])
          end
- 
-         def record_not_found
-             render json: { status: 'error', message: 'Patient record not found'}
-         end
+         
       end
     end
  end
