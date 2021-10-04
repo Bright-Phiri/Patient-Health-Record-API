@@ -7,7 +7,7 @@ module Api
                render json: User.all, except: [:password,:password_confirmation]
             end
 
-            # REGISTER
+            # REGISTER USER
             def create
                @user = User.create(user_params)
                if @user.valid?
@@ -22,7 +22,7 @@ module Api
             def login
                   begin
                      if User.exists?
-                       @user = User.find_by_user_name(params[:username])
+                       @user = User.find_by_username!(params[:username]) #Getting dynamic finder to raise ActiveRecord::RecordNotFound exception
                        if @user && @user.authenticate(params[:password])
                          token = encode_token({user_id: @user.id})
                          render json: {status: 'success', message: 'Access granted', user: @user, token: token}, status: :ok
