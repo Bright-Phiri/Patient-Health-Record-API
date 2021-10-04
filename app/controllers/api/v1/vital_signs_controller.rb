@@ -4,8 +4,9 @@ module Api
 
             def create
                 if Patient.where(id: params[:patient_id]).exists?
-                    vital_sign = VitalSign.new(vital_signs_params)
-                    if vital_sign.save
+                    patient = Patient.find(params[:patient_id])
+                    vital_sign = patient.vital_signs.create(weight: params[:weight],height: params[:height],temp_reading: params[:temp_reading],diagnosis: params[:diagnosis])
+                    if vital_sign.persisted?
                       render json: { status: 'success', message: 'Vital signs successfully added to the patient',data: vital_sign}, status: :created
                     else
                       render json: { status: 'error', message: 'Failed to add vital signs to patient', data: vital_sign.errors.full_messages}
