@@ -17,8 +17,9 @@ module Api
             end
 
             def show
-                vital_signs = VitalSign.where(patient_id: params[:id])
-                if vital_signs.blank?
+                patient = Patient.find(params[:id])
+                vital_signs = patient.vital_signs
+                if vital_signs.empty?
                     render json: { status: 'error', message: 'Virtal signs not recorded for this patient'}
                 else
                     render json: { status: 'success', message: 'Vital signs loaded',data: vital_signs}, status: :ok
