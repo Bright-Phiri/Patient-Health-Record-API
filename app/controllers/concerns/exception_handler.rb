@@ -2,12 +2,12 @@ module ExceptionHandler
     extend ActiveSupport::Concern
 
     included do
-        rescue_from ActiveRecord::RecordNotFound do
-            render json: { status: 'error', message: 'Record not found'}
+        rescue_from ActiveRecord::RecordNotFound do |e|
+            render json: { status: 'error', message: e.message}
         end
 
-        rescue_from ActiveRecord::RecordInvalid do 
-            render json: { status: 'error', message: 'Record is invalid'}
+        rescue_from ActiveRecord::RecordInvalid do |e|
+            render json: { status: 'error', message: e.message}
         end
     end
 end
