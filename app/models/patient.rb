@@ -1,5 +1,5 @@
 class Patient < ApplicationRecord
-    has_many :vital_signs, dependent: :destroy
+    has_many :vital_signs,->{order(:created_at).reverse_order}, dependent: :destroy
     validates :first_name, :last_name, :gender, :dob, :district, :village, :occupation, presence: true
     validate :date_of_birth_cannot_be_in_the_future
     
