@@ -148,7 +148,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   jwt
-  pg (~> 1.2, >= 1.2.3)
+  pg
   puma (~> 5.0)
   rack-cors
   rails (~> 6.1.4, >= 6.1.4.1)
@@ -159,4 +159,4 @@ RUBY VERSION
    ruby 2.7.3p183
 
 BUNDLED WITH
-   2.2.25
+   2.2.27
