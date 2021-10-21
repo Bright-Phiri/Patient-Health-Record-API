@@ -22,7 +22,7 @@ class Patient < ApplicationRecord
 
     def date_of_birth_cannot_be_in_the_future
         if dob.present? && dob > Date.today
-            errors.add(:dob, " is Invalid")
+            errors.add :dob, message: " is Invalid"
         end
     end
 
