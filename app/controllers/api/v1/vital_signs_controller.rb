@@ -12,7 +12,7 @@ module Api
                       render json: { status: 'error', message: 'Failed to add vital signs to patient', data: vital_signs.errors.full_messages}
                     end
                 else
-                    render json: { status: 'error', message: 'Patient record not found'} 
+                    raise ActiveRecord::RecordNotFound.new("patient record not found")
                 end
             end
 
