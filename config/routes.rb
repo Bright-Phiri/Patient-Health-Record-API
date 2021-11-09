@@ -5,8 +5,8 @@ Rails.application.routes.draw do
         resources :vital_signs, only: [:create, :show]
       end
       resources :users, only: [:index, :create]
-      post '/login', to: 'users#login'
-      get '/statistics',to: 'patients#statistics'
+      post '/login', action: :login, controller: 'users'
+      get '/statistics', action: :statistics, controller: 'patients'
     end
   end
 end

@@ -4,7 +4,7 @@ module Api
             before_action :authorized, only: [:auto_login]
 
             def index
-               render json: User.all, except: [:password,:password_confirmation]
+               render json: User.all.to_json(except: [:password_digest, :created_at, :updated_at])
             end
 
             # REGISTER USER
