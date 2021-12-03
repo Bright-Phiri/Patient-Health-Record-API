@@ -25,7 +25,7 @@ module Api
                        @user = User.find_by_username!(params[:username]) #Getting dynamic finder to raise exception
                        if @user && @user.authenticate(params[:password])
                          token = encode_token({user_id: @user.id})
-                         render json: {status: 'success', message: 'Access granted', user: @user, token: token}, status: :ok
+                         render json: {status: 'success', message: 'Access granted', user: @user, token: token, avatar: url_for(@user.avatar)}, status: :ok
                        else
                          render json: {status: 'error', message: "Invalid username or password"}
                        end
@@ -44,7 +44,7 @@ module Api
            private
  
            def user_params
-              params.permit(:username, :email,:password,:password_confirmation)
+              params.permit(:username, :email, :avatar, :password,:password_confirmation)
            end
         end
     end
