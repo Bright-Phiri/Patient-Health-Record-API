@@ -8,8 +8,8 @@ local:
 
 google:
   service: GCS
-  credentials: <%= Rails.root.join("path/to/keyfile.json") %>
   project: My Project 53704
+  credentials: <%= Rails.root.join("keyfile.json") %>
   bucket: rail-active-storage2
 
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
