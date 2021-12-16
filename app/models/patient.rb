@@ -1,5 +1,6 @@
 class Patient < ApplicationRecord
     has_many :vital_signs,->{order(:created_at).reverse_order}, dependent: :destroy
+    validates_associated :vital_signs
     validates :first_name, :last_name, :dob, :district, :village, presence: true
     VALID_OCCUPATIONS = ['Accountant','Software Developer','Business Owner','Mechanic','Driver','Welder','Construction worker','Painter','Radiologist','Student','Farmer','Coal miner']
     VALID_GENDERS = ['Male','Female']

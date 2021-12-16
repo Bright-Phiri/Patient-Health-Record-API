@@ -7,6 +7,11 @@ module Api
                render json: User.all.to_json(except: [:password_digest, :created_at, :updated_at])
             end
 
+            def show
+              user = User.find(params[:id])
+              render json: {status: 'success', message: 'User found', data: user,avatar: url_for(user.avatar)}
+            end
+
             # REGISTER USER
             def create
                @user = User.create(user_params)
@@ -44,7 +49,7 @@ module Api
            private
  
            def user_params
-              params.permit(:username, :email, :avatar, :password,:password_confirmation)
+              params.permit(:id, :username, :email, :avatar, :password,:password_confirmation)
            end
         end
     end

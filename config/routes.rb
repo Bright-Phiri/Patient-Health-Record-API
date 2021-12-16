@@ -4,7 +4,7 @@ Rails.application.routes.draw do
       resources :patients do
         resources :vital_signs, only: [:create, :show]
       end
-      resources :users, only: [:index, :create]
+      resources :users, only: [:index, :show, :create]
       post '/login', action: :login, controller: 'users'
       get '/statistics', action: :statistics, controller: 'patients'
     end
