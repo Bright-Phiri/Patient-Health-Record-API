@@ -2,14 +2,14 @@ module Api
     module V1 
         class UsersController < ApplicationController
             before_action :authorized, only: [:auto_login]
+            before_action :set_user, only: [:show, :update, :destroy]
 
             def index
                render json: User.all.to_json(except: [:password_digest, :created_at, :updated_at])
             end
 
             def show
-              user = User.find(params[:id])
-              render json: {status: 'success', message: 'User found', data: user,avatar: url_for(user.avatar)}
+              render json: {status: 'success', message: 'User found', data: @user,avatar: url_for(@user.avatar)}
             end
 
             # REGISTER USER
@@ -20,6 +20,24 @@ module Api
                 render json: {status: 'success', message: 'Account successfully created', user: @user, token: token}, status: :created
               else
                 render json: {status:'error', message: 'Failed to create user account', error: @user.errors.full_messages}
+              end
+            end
+
+            def update 
+                @user.avatar.purge
+                if @user.update(user_params)
+                  render json: {status: 'success', message: 'user successfully updated', data: @user}, status: :ok
+                else
+                  render json: {status: 'error', message: 'failed to update user', errors: @user.errors.full_message}
+                end
+            end
+
+            def destroy
+              @user.avatar.purge
+              if @user.destroy
+                  render json: {status: 'success', message: 'user successfully deleted', data: @user}
+              else
+                  render json: {status: 'error', message: 'failed to deleted user'}
               end
             end
 
@@ -47,6 +65,10 @@ module Api
            end
 
            private
+
+           def set_user
+             @user = User.find(params[:id])
+           end
  
            def user_params
               params.permit(:id, :username, :email, :avatar, :password,:password_confirmation)
