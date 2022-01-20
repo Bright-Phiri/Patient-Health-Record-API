@@ -29,7 +29,7 @@ module Api
             private
 
             def vital_signs_params
-                params.permit(:id, :weight, :height, :temp_reading, :diagnosis, :patient_id)
+                params.permit(:weight, :height, :temp_reading, :diagnosis, :patient_id)
             end
         end
     end
