@@ -4,7 +4,7 @@ module Api
          before_action :set_patient, only: [:show, :update, :destroy]
  
          def index
-           patients = Patient.all
+           patients = Patient.unscoped.all
            render json: { status: 'success', message: 'Loaded patients',data: patients}, status: :ok
          end
 
