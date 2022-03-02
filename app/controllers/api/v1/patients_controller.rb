@@ -44,7 +44,7 @@ module Api
          private
  
          def patient_params
-             params.permit(:first_name, :last_name, :gender, :dob, :district, :village, :occupation)
+             params.permit(:id, :first_name, :last_name, :gender, :dob, :district, :village, :occupation)
          end
  
          def set_patient
